@@ -2,7 +2,6 @@
 //11/02/20
 //Mr. Guglielmi
 //Tetris: Final ISP
-//Krish you are fat
 import java.awt.*;
 import java.awt.image.*;
 import java.applet.*;
