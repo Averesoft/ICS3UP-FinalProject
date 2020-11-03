@@ -34,7 +34,7 @@ public class Tetris
     Tetromino tets[] = new Tetromino[7];
     public Tetris ()
     {
-	c = new Console (30, 60);
+	c = new Console (25, 60);
     }
     public void fillLanded ()
     {
