@@ -21,7 +21,7 @@ public class Tetris
     int[][][] block;
     int rotation = 1;
     int height, width;
-	
+    int diff = 10;    
     BufferedImage cyan = null;
     BufferedImage blue = null;
     BufferedImage green = null;
@@ -30,7 +30,6 @@ public class Tetris
     BufferedImage red = null;
     BufferedImage yellow = null;
     BufferedImage grey = null;
-    Color gr = new Color (19, 19, 19);
     int landed[] [] = new int [16] [10];
     Tetromino tets[] = new Tetromino[7];
     public Tetris ()
@@ -47,7 +46,7 @@ public class Tetris
 	    }
 	}
     }
-    int diff = 10;
+    
     public void drawOutline() {
 	c.setColor(new Color(74, 74, 74));
 	c.fillRoundRect(0, 0, 470, 16*30+20, 10, 10);
@@ -91,7 +90,6 @@ public class Tetris
 		{
 		    c.drawImage (grey, j * 30 + diff, i * 30 + diff, null);
 		}
-
 	    }
 	}
     }
