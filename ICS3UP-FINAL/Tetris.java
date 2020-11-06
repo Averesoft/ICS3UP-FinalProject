@@ -14,13 +14,13 @@ import hsa.Console;
 
 public class Tetris
 {
-    Console c;           // The output console
+    static Console c;           // The output console
     //The tiles
     int blockX = 4, blockY = 2;
-    int random;
+    static int random;
     int[][][] block;
-    int rotation = 1;
-    int height, width;
+    static int rotation = 1;
+    static int height, width;
     int diff = 10;    
     BufferedImage cyan = null;
     BufferedImage blue = null;
@@ -31,7 +31,7 @@ public class Tetris
     BufferedImage yellow = null;
     BufferedImage grey = null;
     int landed[] [] = new int [16] [10];
-    Tetromino tets[] = new Tetromino[7];
+    static Tetromino tets[] = new Tetromino[7];
     public Tetris ()
     {
 	c = new Console (25, 60);
@@ -134,16 +134,16 @@ public class Tetris
 	     {1, 0}},
 	    {{1, 0, 0}, 
 	     {1, 1, 1}},
-	    {{1, 1},
-	     {1, 0},
-	     {1, 0}}
+	    {{0, 1},
+	     {0, 1},
+	     {1, 1}}
 	});
 	tets[2] = new Tetromino(new int[][][] {
 	    {{4, 4, 4}, 
 	     {4, 0, 0}},
-	    {{4, 0},
-	     {4, 0},
-	     {4, 4}},
+	    {{4, 4},
+	     {0, 4},
+	     {0, 4}},
 	    {{0, 0, 4}, 
 	     {4, 4, 4}},
 	    {{4, 0},
@@ -205,7 +205,7 @@ public class Tetris
 	width = tets[random].getWidth(rotation);
     }
     
-    public void userInput() {
+    public void drawCurrentTetromino() {
 	
 	for (int i = 0; i < height; i++) {
 	    for (int j = 0; j < width; j++) {
@@ -240,28 +240,30 @@ public class Tetris
 		}
 	    }
 	}
+	
     }
+    
+   
+    
     public static void main (String[] args)
     {
+	
 	Tetris t = new Tetris ();
+	CheckInput ci = new CheckInput(c);
+	
 	t.loadTiles ();
 	t.fillLanded ();
 	t.drawOutline();
 	t.fillTetrominos();
 	t.chooseBlock();
-	boolean exit = false;
+	ci.start();
+	t.drawLanded ();
+	t.drawCurrentTetromino();
 	
-	while(!exit) {
-	    try
-	    {
-		Thread.sleep (1000);
-	    }
-	    catch (Exception e)
-	    {
-	    }
-	    t.drawLanded ();
-	    t.userInput();
-	}
+	   
+	
+       
+	
 	// Place your program here.  'c' is the output console
     } // main method
 } // Tetris class
