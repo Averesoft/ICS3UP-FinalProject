@@ -245,13 +245,165 @@ public class Tetris
     
    
     
+    public void splashScreen()
+    {
+	boolean splashScreenDone = true;
+	for(int i=0; i<18; i++){
+	    c.clear();
+	    try{ 
+	    c.setColor(new Color(74, 74, 74));
+	    c.fillRoundRect(0, 0, 500, 500, 10, 10);
+	
+	 for (int h = 0 ; h < 16 ; h++)
+	 {
+	     for (int j = 0 ; j < 15 ; j++)
+		{
+		c.drawImage (grey, j * 30 + diff, h * 30 + diff, null);
+		}
+	  }
+
+	  if(i<=6){
+	  //Drawing the R
+	  c.drawImage(purple,(diff+90), (diff+30*(i+1)), null);
+	  c.drawImage(purple,(diff+90), (diff+30*(i+2)), null);
+	  c.drawImage(purple,(diff+90), (diff+30*(i+3)), null);
+	  c.drawImage(purple,(diff+90), (diff+30*(i+4)), null);
+	  c.drawImage(purple,(diff+90), (diff+30*(i+5)), null);
+	  c.drawImage(purple,(diff+120), (diff+30*(i+1)), null);
+	  c.drawImage(purple,(diff+120), (diff+30*(i+3)), null);
+	  c.drawImage(purple,(diff+150), (diff+30*(i+2)), null);
+	  c.drawImage(purple,(diff+150), (diff+30*(i+4)), null);
+	  c.drawImage(purple,(diff+150), (diff+30*(i+5)), null);
+	  //Drawing the I
+	  c.drawImage(yellow,(diff+180), (diff+30*(i+5)), null);
+	  c.drawImage(yellow,(diff+210), (diff+30*(i+5)), null);
+	  c.drawImage(yellow,(diff+240), (diff+30*(i+5)), null);
+	  c.drawImage(yellow,(diff+210), (diff+30*(i+4)), null);
+	  c.drawImage(yellow,(diff+210), (diff+30*(i+3)), null);
+	  c.drawImage(yellow,(diff+210), (diff+30*(i+2)), null);
+	  c.drawImage(yellow,(diff+210), (diff+30*(i+1)), null);
+	  c.drawImage(yellow,(diff+180), (diff+30*(i+1)), null);
+	  c.drawImage(yellow,(diff+240), (diff+30*(i+1)), null);
+	  //Drawing the S
+	  c.drawImage(green,(diff+270), (diff+30*(i+1)), null);
+	  c.drawImage(green,(diff+300), (diff+30*(i+1)), null);
+	  c.drawImage(green,(diff+330), (diff+30*(i+1)), null);
+	  c.drawImage(green,(diff+270), (diff+30*(i+2)), null);
+	  c.drawImage(green,(diff+270), (diff+30*(i+3)), null);
+	  c.drawImage(green,(diff+300), (diff+30*(i+3)), null);
+	  c.drawImage(green,(diff+330), (diff+30*(i+3)), null);
+	  c.drawImage(green,(diff+330), (diff+30*(i+4)), null);
+	  c.drawImage(green,(diff+330), (diff+30*(i+5)), null);
+	  c.drawImage(green,(diff+300), (diff+30*(i+5)), null);
+	  c.drawImage(green,(diff+270), (diff+30*(i+5)), null); 
+	  } else if (i>6){
+	  //Drawing the R
+	  c.drawImage(purple,(diff+90), (diff+30*(6+1)), null);
+	  c.drawImage(purple,(diff+90), (diff+30*(6+2)), null);
+	  c.drawImage(purple,(diff+90), (diff+30*(6+3)), null);
+	  c.drawImage(purple,(diff+90), (diff+30*(6+4)), null);
+	  c.drawImage(purple,(diff+90), (diff+30*(6+5)), null);
+	  c.drawImage(purple,(diff+120), (diff+30*(6+1)), null);
+	  c.drawImage(purple,(diff+120), (diff+30*(6+3)), null);
+	  c.drawImage(purple,(diff+150), (diff+30*(6+2)), null);
+	  c.drawImage(purple,(diff+150), (diff+30*(6+4)), null);
+	  c.drawImage(purple,(diff+150), (diff+30*(6+5)), null);
+	  //Drawing the I
+	  c.drawImage(yellow,(diff+180), (diff+30*(6+5)), null);
+	  c.drawImage(yellow,(diff+210), (diff+30*(6+5)), null);
+	  c.drawImage(yellow,(diff+240), (diff+30*(6+5)), null);
+	  c.drawImage(yellow,(diff+210), (diff+30*(6+4)), null);
+	  c.drawImage(yellow,(diff+210), (diff+30*(6+3)), null);
+	  c.drawImage(yellow,(diff+210), (diff+30*(6+2)), null);
+	  c.drawImage(yellow,(diff+210), (diff+30*(6+1)), null);
+	  c.drawImage(yellow,(diff+180), (diff+30*(6+1)), null);
+	  c.drawImage(yellow,(diff+240), (diff+30*(6+1)), null);
+	  //Drawing the S
+	  c.drawImage(green,(diff+270), (diff+30*(6+1)), null);
+	  c.drawImage(green,(diff+300), (diff+30*(6+1)), null);
+	  c.drawImage(green,(diff+330), (diff+30*(6+1)), null);
+	  c.drawImage(green,(diff+270), (diff+30*(6+2)), null);
+	  c.drawImage(green,(diff+270), (diff+30*(6+3)), null);
+	  c.drawImage(green,(diff+300), (diff+30*(6+3)), null);
+	  c.drawImage(green,(diff+330), (diff+30*(6+3)), null);
+	  c.drawImage(green,(diff+330), (diff+30*(6+4)), null);
+	  c.drawImage(green,(diff+330), (diff+30*(6+5)), null);
+	  c.drawImage(green,(diff+300), (diff+30*(6+5)), null);
+	  c.drawImage(green,(diff+270), (diff+30*(6+5)), null);
+	  }
+	  if(i<=12){
+	  //Drawing the T
+	  c.drawImage(blue, (diff+90), (diff+30*(i-10)), null);
+	  c.drawImage(blue, (diff+30+90), (diff+30*(i-10)), null);
+	  c.drawImage(blue, (diff+60+90), (diff+30*(i-10)), null);
+	  c.drawImage(blue, (diff+30+90), (diff+(30*((i-10)+1))),null);
+	  c.drawImage(blue, (diff+30+90), (diff+(30*((i-10)+2))),null);
+	  c.drawImage(blue, (diff+30+90), (diff+(30*((i-10)+3))),null);
+	  c.drawImage(blue, (diff+30+90), (diff+(30*((i-10)+4))),null);
+	  //Drawing the E
+	  c.drawImage(orange, (diff+90+90), (diff+30*(i-10)), null);
+	  c.drawImage(orange, (diff+120+90), (diff+30*(i-10)), null);
+	  c.drawImage(orange, (diff+150+90), (diff+30*(i-10)), null);
+	  c.drawImage(orange, (diff+90+90), (diff+(30*((i-10)+1))),null);
+	  c.drawImage(orange, (diff+90+90), (diff+(30*((i-10)+2))),null);
+	  c.drawImage(orange, (diff+90+90), (diff+(30*((i-10)+3))),null);
+	  c.drawImage(orange, (diff+90+90), (diff+(30*((i-10)+4))),null);
+	  c.drawImage(orange, (diff+120+90), (diff+(30*((i-10)+2))),null);
+	  c.drawImage(orange, (diff+120+90), (diff+(30*((i-10)+4))),null);
+	  c.drawImage(orange, (diff+150+90), (diff+(30*((i-10)+4))),null);
+	  //Drawing the 2nd T
+	  c.drawImage(red, (diff+270), (diff+30*(i-10)), null);
+	  c.drawImage(red, (diff+300), (diff+30*(i-10)), null);
+	  c.drawImage(red, (diff+330), (diff+30*(i-10)), null);
+	  c.drawImage(red, (diff+300), (diff+(30*((i-10)+1))),null);
+	  c.drawImage(red, (diff+300), (diff+(30*((i-10)+2))),null);
+	  c.drawImage(red, (diff+300), (diff+(30*((i-10)+3))),null);
+	  c.drawImage(red, (diff+300), (diff+(30*((i-10)+4))),null);
+	  } else if (i>12)
+	  {
+	  c.drawImage(blue, (diff+90), (diff+30*2), null);
+	  c.drawImage(blue, (diff+30+90), (diff+30*2), null);
+	  c.drawImage(blue, (diff+60+90), (diff+30*2), null);
+	  c.drawImage(blue, (diff+30+90), (diff+(30*(2+1))),null);
+	  c.drawImage(blue, (diff+30+90), (diff+(30*(2+2))),null);
+	  c.drawImage(blue, (diff+30+90), (diff+(30*(2+3))),null);
+	  c.drawImage(blue, (diff+30+90), (diff+(30*(2+4))),null);
+	  //Drawing the E
+	  c.drawImage(orange, (diff+90+90), (diff+30*2), null);
+	  c.drawImage(orange, (diff+120+90), (diff+30*2), null);
+	  c.drawImage(orange, (diff+150+90), (diff+30*2), null);
+	  c.drawImage(orange, (diff+90+90), (diff+(30*(2+1))),null);
+	  c.drawImage(orange, (diff+90+90), (diff+(30*(2+2))),null);
+	  c.drawImage(orange, (diff+90+90), (diff+(30*(2+3))),null);
+	  c.drawImage(orange, (diff+90+90), (diff+(30*(2+4))),null);
+	  c.drawImage(orange, (diff+120+90), (diff+(30*(2+2))),null);
+	  c.drawImage(orange, (diff+120+90), (diff+(30*(2+4))),null);
+	  c.drawImage(orange, (diff+150+90), (diff+(30*(2+4))),null);
+	  //Drawing the 2nd T
+	  c.drawImage(red, (diff+270), (diff+30*2), null);
+	  c.drawImage(red, (diff+300), (diff+30*2), null);
+	  c.drawImage(red, (diff+330), (diff+30*2), null);
+	  c.drawImage(red, (diff+300), (diff+(30*(2+1))),null);
+	  c.drawImage(red, (diff+300), (diff+(30*(2+2))),null);
+	  c.drawImage(red, (diff+300), (diff+(30*(2+3))),null);
+	  c.drawImage(red, (diff+300), (diff+(30*(2+4))),null);
+	  }
+	  c.setColor(new Color(255,255,255));
+	  c.drawString("Tetris, By: Jeremy Liang and Krish Patel, Date: November 16, 2020",70,390);
+	Thread.sleep(500);        
+	}
+	catch(Exception e){}
+	}
+    }
+    
     public static void main (String[] args)
     {
 	
 	Tetris t = new Tetris ();
 	CheckInput ci = new CheckInput(c);
-	
-	t.loadTiles ();
+
+	t.loadTiles ();        
+	t.splashScreen();      
 	t.fillLanded ();
 	t.drawOutline();
 	t.fillTetrominos();
@@ -259,11 +411,7 @@ public class Tetris
 	ci.start();
 	t.drawLanded ();
 	t.drawCurrentTetromino();
-	
-	   
-	
-       
-	
+    
 	// Place your program here.  'c' is the output console
     } // main method
 } // Tetris class
