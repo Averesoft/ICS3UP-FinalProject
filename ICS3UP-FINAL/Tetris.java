@@ -11,33 +11,30 @@ import java.util.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import hsa.Console;
-
 public class Tetris
 {
-    static Console c;           // The output console
+    static Console c;
     //The tiles
-    int blockX = 4, blockY = 2;
+    static int blockX = 4, blockY = 2;
     static int random;
-    int[][][] block;
+    static int[][][] block;
     static int rotation = 1;
     static int height, width;
     int diff = 10;    
-    BufferedImage cyan = null;
-    BufferedImage blue = null;
-    BufferedImage green = null;
-    BufferedImage orange = null;
-    BufferedImage purple = null;
-    BufferedImage red = null;
-    BufferedImage yellow = null;
-    BufferedImage grey = null;
-    int landed[] [] = new int [16] [10];
+    static BufferedImage cyan = null;
+    static BufferedImage blue = null;
+    static BufferedImage green = null;
+    static BufferedImage orange = null;
+    static BufferedImage purple = null;
+    static BufferedImage red = null;
+    static BufferedImage yellow = null;
+    static BufferedImage grey = null;
+    static int landed[] [] = new int [16] [10];
     static Tetromino tets[] = new Tetromino[7];
-    public Tetris ()
-    {
+    public Tetris () {
 	c = new Console (25, 60);
     }
-    public void fillLanded ()
-    {
+    public void fillLanded () {
 	for (int i = 0 ; i < 16 ; i++)
 	{
 	    for (int j = 0 ; j < 10 ; j++)
@@ -51,43 +48,32 @@ public class Tetris
 	c.setColor(new Color(74, 74, 74));
 	c.fillRoundRect(0, 0, 470, 16*30+20, 10, 10);
     }
-    public void drawLanded ()
-    {
-	for (int i = 0 ; i < 16 ; i++)
-	{
-	    for (int j = 0 ; j < 10 ; j++)
-	    {
+    public void drawLanded () {
+	for (int i = 0 ; i < 16 ; i++) {
+	    for (int j = 0 ; j < 10 ; j++) {
 		int num = landed [i] [j];
-		if (num == 1)
-		{
+		if (num == 1) {
 		    c.drawImage (blue, j * 30 + diff, i * 30 + diff, null);
 		}
-		else if (num == 2)
-		{
+		else if (num == 2) {
 		    c.drawImage (cyan, j * 30 + diff, i * 30 + diff, null);
 		}
-		else if (num == 3)
-		{
+		else if (num == 3) {
 		    c.drawImage (green, j * 30 + diff, i * 30 + diff, null);
 		}
-		else if (num == 4)
-		{
+		else if (num == 4) {
 		    c.drawImage (orange, j * 30 + diff, i * 30 + diff, null);
 		}
-		else if (num == 5)
-		{
+		else if (num == 5) {
 		    c.drawImage (purple, j * 30 + diff, i * 30 + diff, null);
 		}
-		else if (num == 6)
-		{
+		else if (num == 6) {
 		    c.drawImage (red, j * 30 + diff, i * 30 + diff, null);
 		}
-		else if (num == 7)
-		{
+		else if (num == 7) {
 		    c.drawImage (yellow, j * 30 + diff, i * 30 + diff, null);
 		}
-		else if (num == 0)
-		{
+		else if (num == 0) {
 		    c.drawImage (grey, j * 30 + diff, i * 30 + diff, null);
 		}
 	    }
@@ -175,9 +161,9 @@ public class Tetris
 	tets[5] = new Tetromino(new int[][][] {
 	    {{0, 5, 0},
 	    {5, 5, 5}},
-	    {{0, 5},
+	    {{5, 0},
 	     {5, 5},
-	     {0, 5}},
+	     {5, 0}},
 	    {{5, 5, 5},
 	     {0, 5, 0}},
 	    {{0, 5},
@@ -243,7 +229,23 @@ public class Tetris
 	
     }
     
-   
+    public static boolean hasLanded() {
+	boolean validity = false;
+	if (blockX + height > 16) {
+	    validity = true;    
+	} else {
+	    for (int i = blockY; i < blockY + height; i++) {
+		for (int j = blockX; i < blockX + width; i++) {
+		    if (landed[i+1][j+1] != 0 && block[rotation][i][j] != 0) {
+			validity = true;
+		    
+		    }
+		}
+	    }
+	}
+	return validity;
+	
+    }
     
     public void splashScreen()
     {
@@ -400,18 +402,80 @@ public class Tetris
     {
 	
 	Tetris t = new Tetris ();
-	CheckInput ci = new CheckInput(c);
-
 	t.loadTiles ();        
-	t.splashScreen();      
+	t.splashScreen();  
+	MoveDown md = new MoveDown(c);
+	KeyPress kp = new KeyPress(c);
+	t.loadTiles ();
 	t.fillLanded ();
 	t.drawOutline();
 	t.fillTetrominos();
+	md.start();
+	kp.start();
+	boolean land = false;
 	t.chooseBlock();
-	ci.start();
+	kp.blockX = blockX;
+	kp.blockY = blockY;
+	kp.rotation = rotation;
+	kp.height = height;
+	kp.width = width;
+	kp.cyan = cyan;
+	kp.blue = blue;
+	kp.green = green;
+	kp.orange = orange;
+	kp.purple = purple;
+	kp.red = red;
+	kp.yellow = yellow;
+	kp.grey = grey;
+	kp.block = block;
+	kp.landed = landed;
+	kp.block = block;
+	
+	md.blockX = blockX;
+	md.blockY = blockY;
+	md.rotation = rotation;
+	md.height = height;
+	md.width = width;
+	md.cyan = cyan;
+	md.blue = blue;
+	md.green = green;
+	md.orange = orange;
+	md.purple = purple;
+	md.red = red;
+	md.yellow = yellow;
+	md.grey = grey;
+	md.block = block;
+	md.landed = landed;
+	md.block = block;
 	t.drawLanded ();
 	t.drawCurrentTetromino();
-    
+	while(true) {
+	    land = hasLanded();
+	    if (land) {
+		for (int i = blockY; i < blockY+height; i++) {
+		    for (int j = blockX; j < blockX+width; j++) {
+			landed[i][j] = block[rotation][i][j];
+		    }
+		}
+		t.chooseBlock();
+		blockX = 4; blockY = 2;
+		land = false;
+	    }
+	    blockY = md.blockY;
+	    if (kp.pressed) {
+		kp.blockY = md.blockY;
+		rotation = kp.rotation;
+		height = tets[random].getHeight(rotation);
+		width = tets[random].getWidth(rotation);
+		height = kp.height;
+		width = kp.width;
+		md.blockX = kp.blockX;
+		md.rotation = rotation;
+		md.height = height;
+		md.width = width;
+		kp.pressed = false;
+	    }
+	}
 	// Place your program here.  'c' is the output console
     } // main method
 } // Tetris class
