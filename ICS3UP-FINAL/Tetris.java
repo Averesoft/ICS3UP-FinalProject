@@ -115,14 +115,14 @@ public class Tetris
 	tets[1] = new Tetromino(new int[][][] {
 	    {{1, 1, 1}, 
 	     {0, 0, 1}},
-	    {{1, 1},
-	     {1, 0},
-	     {1, 0}},
-	    {{1, 0, 0}, 
-	     {1, 1, 1}},
 	    {{0, 1},
 	     {0, 1},
-	     {1, 1}}
+	     {1, 1}},
+	    {{1, 0, 0}, 
+	     {1, 1, 1}},
+	    {{1, 1},
+	     {1, 0},
+	     {1, 0}}
 	});
 	tets[2] = new Tetromino(new int[][][] {
 	    {{4, 4, 4}, 
@@ -231,20 +231,18 @@ public class Tetris
     
     public static boolean hasLanded() {
 	boolean validity = false;
-	if (blockX + height > 16) {
+	if (blockY + height > 15) {
 	    validity = true;    
 	} else {
 	    for (int i = blockY; i < blockY + height; i++) {
-		for (int j = blockX; i < blockX + width; i++) {
-		    if (landed[i+1][j+1] != 0 && block[rotation][i][j] != 0) {
+		for (int j = blockX; j < blockX + width; j++) {
+		    if (landed[i+1][j] != 0 && block[rotation][i-blockY][j-blockX] != 0) {
 			validity = true;
-		    
 		    }
 		}
 	    }
 	}
 	return validity;
-	
     }
     
     public void splashScreen()
@@ -392,6 +390,7 @@ public class Tetris
 	  }
 	  c.setColor(new Color(255,255,255));
 	  c.drawString("Tetris, By: Jeremy Liang and Krish Patel, Date: November 16, 2020",70,390);
+	  
 	Thread.sleep(500);        
 	}
 	catch(Exception e){}
@@ -403,7 +402,7 @@ public class Tetris
 	
 	Tetris t = new Tetris ();
 	t.loadTiles ();        
-	t.splashScreen();  
+	//t.splashScreen();  
 	MoveDown md = new MoveDown(c);
 	KeyPress kp = new KeyPress(c);
 	t.loadTiles ();
@@ -429,7 +428,6 @@ public class Tetris
 	kp.grey = grey;
 	kp.block = block;
 	kp.landed = landed;
-	kp.block = block;
 	
 	md.blockX = blockX;
 	md.blockY = blockY;
@@ -446,34 +444,55 @@ public class Tetris
 	md.grey = grey;
 	md.block = block;
 	md.landed = landed;
-	md.block = block;
 	t.drawLanded ();
 	t.drawCurrentTetromino();
 	while(true) {
+	    
+	    
+	    kp.blockY = md.blockY;
+	    rotation = kp.rotation;
+	    rotation%=4;
+	    height = tets[random].getHeight(rotation);
+	    width = tets[random].getWidth(rotation);
+	    height = kp.height;
+	    width = kp.width;
+	    md.blockX = kp.blockX;
+	    md.rotation = kp.rotation;
+	    md.height = kp.height;
+	    md.width = kp.width;
+	    blockY = md.blockY;
+	    blockX = kp.blockX;
 	    land = hasLanded();
 	    if (land) {
+		blockX = kp.blockX;
+		blockY = md.blockY;
 		for (int i = blockY; i < blockY+height; i++) {
 		    for (int j = blockX; j < blockX+width; j++) {
-			landed[i][j] = block[rotation][i][j];
+			if (block[rotation][i-blockY][j-blockX]!= 0) {
+			    landed[i][j] = block[rotation][i-blockY][j-blockX];
+			}
 		    }
 		}
+		
 		t.chooseBlock();
-		blockX = 4; blockY = 2;
-		land = false;
-	    }
-	    blockY = md.blockY;
-	    if (kp.pressed) {
-		kp.blockY = md.blockY;
-		rotation = kp.rotation;
-		height = tets[random].getHeight(rotation);
-		width = tets[random].getWidth(rotation);
-		height = kp.height;
-		width = kp.width;
-		md.blockX = kp.blockX;
+		blockX = 4; 
+		blockY = 2;
+		kp.block = block;
+		kp.blockX = blockX;
+		kp.blockY = blockY;
+		kp.rotation = rotation;
+		kp.height = height;
+		kp.width = width;
+		kp.landed = landed;
+		
+		md.block = block;
+		md.blockX = blockX;
+		md.blockY = blockY;
 		md.rotation = rotation;
 		md.height = height;
 		md.width = width;
-		kp.pressed = false;
+		md.landed = landed;
+		
 	    }
 	}
 	// Place your program here.  'c' is the output console

@@ -90,26 +90,45 @@ public class KeyPress extends Thread
 	}
 	
     }
-    public static boolean checkValid(int w, char direction) {
+    public static boolean checkValid(int w, int h, char direction, int arr[][]) {
 	boolean validity = true;
 	if (direction == 'a') {
 	    if (blockX <= 0) {
 		validity = false;
+	    } else {
+		for (int i = blockY; i < blockY + h; i++) {
+		    for (int j = blockX; j < blockX + w; j++) {
+			if (arr[i][j-1] != 0) {
+			    validity = false;
+			}
+		    }
+		}
 	    }
 	} else if (direction == 'd') {
 	    if (blockX + w >= 10) {
 		validity = false;
+	    } else {
+		for (int i = blockY; i < blockY + h; i++) {
+		    for (int j = blockX; j < blockX + w; j++) {
+			if (arr[i][j+1] != 0) {
+			    validity = false;
+			}
+		    }
+		}
 	    }
+	    
 	}
+	
+	
 	return validity;
     }
     public void run() {
 	while(true) {
 	    char ch = c.getChar();
 	    pressed = true;
-	    if (ch == 'a' && checkValid(width, 'a')) {
+	    if (ch == 'a' && checkValid(width, height, 'a', landed)) {
 		blockX--;
-	    } else if (ch == 'd' && checkValid(width, 'd')) {
+	    } else if (ch == 'd' && checkValid(width, height, 'd', landed)) {
 		blockX++;
 	    } else if (ch == 'w') {
 		rotation++;
