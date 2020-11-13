@@ -27,7 +27,7 @@ public class MoveDown extends Thread
     }
     public void drop() {
 	try {
-	    sleep(dropRate-linesCleared*10);
+	    sleep(dropRate-linesCleared*20);
 	} catch (Exception e) {
 	}
 	blockY++;
