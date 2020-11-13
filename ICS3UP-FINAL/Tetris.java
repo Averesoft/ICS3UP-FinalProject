@@ -15,22 +15,23 @@ public class Tetris
 {
     static Console c;
     //The tiles
-    static int blockX = 4, blockY = 2;
-    static int random;
-    static int[][][] block;
-    static int rotation = 1;
-    static int height, width;
-    int diff = 10;    
-    static BufferedImage cyan = null;
-    static BufferedImage blue = null;
-    static BufferedImage green = null;
-    static BufferedImage orange = null;
-    static BufferedImage purple = null;
+    int blockX = 4, blockY = 1;
+    int random;
+    int[][][] block;
+    int rotation = 1;
+    int height, width;
+    int diff = 10;
+    int linesCleared = 0;
+    BufferedImage cyan = null;
+    BufferedImage blue = null;
+    BufferedImage green = null;
+    BufferedImage orange = null;
+    BufferedImage purple = null;
     static BufferedImage red = null;
-    static BufferedImage yellow = null;
-    static BufferedImage grey = null;
-    static int landed[] [] = new int [16] [10];
-    static Tetromino tets[] = new Tetromino[7];
+    BufferedImage yellow = null;
+    BufferedImage grey = null;
+    int landed[] [] = new int [16] [10];
+    Tetromino tets[] = new Tetromino[7];
     public Tetris () {
 	c = new Console (25, 60);
     }
@@ -229,7 +230,7 @@ public class Tetris
 	
     }
     
-    public static boolean hasLanded() {
+    public static boolean hasLanded(int blockX, int blockY, int height, int width, int landed[][], int block[][][], int rotation) {
 	boolean validity = false;
 	if (blockY + height > 15) {
 	    validity = true;    
@@ -242,6 +243,7 @@ public class Tetris
 		}
 	    }
 	}
+	
 	return validity;
     }
     
@@ -413,87 +415,121 @@ public class Tetris
 	kp.start();
 	boolean land = false;
 	t.chooseBlock();
-	kp.blockX = blockX;
-	kp.blockY = blockY;
-	kp.rotation = rotation;
-	kp.height = height;
-	kp.width = width;
-	kp.cyan = cyan;
-	kp.blue = blue;
-	kp.green = green;
-	kp.orange = orange;
-	kp.purple = purple;
-	kp.red = red;
-	kp.yellow = yellow;
-	kp.grey = grey;
-	kp.block = block;
-	kp.landed = landed;
+	kp.blockX = t.blockX;
+	kp.blockY = t.blockY;
+	kp.rotation = t.rotation;
+	kp.height = t.height;
+	kp.width = t.width;
+	kp.cyan = t.cyan;
+	kp.blue = t.blue;
+	kp.green = t.green;
+	kp.orange = t.orange;
+	kp.purple = t.purple;
+	kp.red = t.red;
+	kp.yellow = t.yellow;
+	kp.grey = t.grey;
+	kp.block = t.block;
+	kp.landed = t.landed;
 	
-	md.blockX = blockX;
-	md.blockY = blockY;
-	md.rotation = rotation;
-	md.height = height;
-	md.width = width;
-	md.cyan = cyan;
-	md.blue = blue;
-	md.green = green;
-	md.orange = orange;
-	md.purple = purple;
-	md.red = red;
-	md.yellow = yellow;
-	md.grey = grey;
-	md.block = block;
-	md.landed = landed;
+	md.blockX = t.blockX;
+	md.blockY = t.blockY;
+	md.rotation = t.rotation;
+	md.height = t.height;
+	md.width = t.width;
+	md.cyan = t.cyan;
+	md.blue = t.blue;
+	md.green = t.green;
+	md.orange = t.orange;
+	md.purple = t.purple;
+	md.red = t.red;
+	md.yellow = t.yellow;
+	md.grey = t.grey;
+	md.block = t.block;
+	md.landed = t.landed;
+	md.linesCleared = t.linesCleared;
 	t.drawLanded ();
 	t.drawCurrentTetromino();
 	while(true) {
 	    
 	    
 	    kp.blockY = md.blockY;
-	    rotation = kp.rotation;
-	    rotation%=4;
-	    height = tets[random].getHeight(rotation);
-	    width = tets[random].getWidth(rotation);
-	    height = kp.height;
-	    width = kp.width;
+	    t.rotation = kp.rotation;
+	    t.rotation%=4;
+	    t.height = t.tets[t.random].getHeight(t.rotation);
+	    t.width = t.tets[t.random].getWidth(t.rotation);
+	    t.height = kp.height;
+	    t.width = kp.width;
 	    md.blockX = kp.blockX;
 	    md.rotation = kp.rotation;
 	    md.height = kp.height;
 	    md.width = kp.width;
-	    blockY = md.blockY;
-	    blockX = kp.blockX;
-	    land = hasLanded();
+	    t.blockY = md.blockY;
+	    t.blockX = kp.blockX;
+	    land = hasLanded(t.blockX, t.blockY, t.height, t.width, t.landed, t.block, t.rotation );
 	    if (land) {
-		blockX = kp.blockX;
-		blockY = md.blockY;
-		for (int i = blockY; i < blockY+height; i++) {
-		    for (int j = blockX; j < blockX+width; j++) {
-			if (block[rotation][i-blockY][j-blockX]!= 0) {
-			    landed[i][j] = block[rotation][i-blockY][j-blockX];
+		if (t.blockY == 1) {
+		    System.exit(0);
+		}
+		t.blockX = kp.blockX;
+		t.blockY = md.blockY;
+		for (int i = t.blockY; i < t.blockY+t.height; i++) {
+		    for (int j = t.blockX; j < t.blockX+t.width; j++) {
+			if (t.block[t.rotation][i-t.blockY][j-t.blockX]!= 0) {
+			    t.landed[i][j] = t.block[t.rotation][i-t.blockY][j-t.blockX];
 			}
 		    }
 		}
-		
 		t.chooseBlock();
-		blockX = 4; 
-		blockY = 2;
-		kp.block = block;
-		kp.blockX = blockX;
-		kp.blockY = blockY;
-		kp.rotation = rotation;
-		kp.height = height;
-		kp.width = width;
-		kp.landed = landed;
+		t.blockX = 4; 
+		t.blockY = 1;
+		kp.block = t.block;
+		kp.blockX = t.blockX;
+		kp.blockY = t.blockY;
+		kp.rotation = t.rotation;
+		kp.height = t.height;
+		kp.width = t.width;
+		kp.landed = t.landed;
 		
-		md.block = block;
-		md.blockX = blockX;
-		md.blockY = blockY;
-		md.rotation = rotation;
-		md.height = height;
-		md.width = width;
-		md.landed = landed;
-		
+		md.block = t.block;
+		md.blockX = t.blockX;
+		md.blockY = t.blockY;
+		md.rotation = t.rotation;
+		md.height = t.height;
+		md.width = t.width;
+		md.landed = t.landed;
 	    }
+	    
+	    md.landed = t.landed;
+	    kp.landed = t.landed;
+	    boolean checkLine;
+	    int temp[][] = new int [16][10];
+	    for (int i = 0; i < 16; i++) {
+		checkLine = true;
+		for (int j = 0; j < 10; j++) {
+		    if (t.landed[i][j] == 0) {
+			checkLine = false;
+		    }
+		}
+		if(checkLine) {
+		    for (int j = 0; j < 10; j++) {
+			temp[0][j] = 0;
+		    }
+		    for (int b = 1; b <= i; b++) { 
+			for (int j = 0; j < 10; j++) {
+			    temp[b][j] = t.landed[b-1][j];
+			}
+		    } 
+		    for (int b = 1; b <= i; b++) {
+			for (int j = 0; j < 10; j++) {
+			    t.landed[b][j] = temp[b][j];
+			}
+		    }
+		    t.linesCleared++; 
+		   
+		}
+	    }
+	    md.linesCleared = t.linesCleared;
+	    
 	}
 	// Place your program here.  'c' is the output console
     } // main method

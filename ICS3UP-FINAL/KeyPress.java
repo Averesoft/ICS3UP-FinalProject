@@ -1,4 +1,7 @@
-// The "KeyPress" class.
+//Jeremy Liang, Krish Patel
+//11/02/20
+//Mr. Guglielmi
+//Key Press Thread
 import java.awt.*;
 import java.awt.image.*;
 import hsa.Console;
@@ -90,58 +93,90 @@ public class KeyPress extends Thread
 	}
 	
     }
-    public static boolean checkValid(int w, int h, char direction, int arr[][]) {
+    public static boolean checkValid(int w, int h, int landed[][], char direction) {
 	boolean validity = true;
 	if (direction == 'a') {
 	    if (blockX <= 0) {
 		validity = false;
 	    } else {
 		for (int i = blockY; i < blockY + h; i++) {
-		    for (int j = blockX; j < blockX + w; j++) {
-			if (arr[i][j-1] != 0) {
-			    validity = false;
-			}
+		    if (landed[i][blockX-1] != 0) {
+			validity = false;
 		    }
 		}
 	    }
+	    
 	} else if (direction == 'd') {
 	    if (blockX + w >= 10) {
 		validity = false;
 	    } else {
 		for (int i = blockY; i < blockY + h; i++) {
-		    for (int j = blockX; j < blockX + w; j++) {
-			if (arr[i][j+1] != 0) {
-			    validity = false;
-			}
+		    if (landed[blockY][blockX+1] != 0) {
+			validity = false;
 		    }
 		}
 	    }
 	    
 	}
-	
-	
 	return validity;
     }
     public void run() {
 	while(true) {
 	    char ch = c.getChar();
 	    pressed = true;
-	    if (ch == 'a' && checkValid(width, height, 'a', landed)) {
-		blockX--;
-	    } else if (ch == 'd' && checkValid(width, height, 'd', landed)) {
-		blockX++;
-	    } else if (ch == 'w') {
-		rotation++;
-		rotation%=4;
-		height = block[rotation].length;
-		width = block[rotation][0].length;
-	    }
-	    drawLanded();
-	    drawCurrentTetromino();
 	    try{
 	    sleep(10);
 	    } catch (Exception e) {
 	    }
+	    if (ch == 'a' && checkValid(width, height, landed, 'a')) {
+		blockX--;
+	    } else if (ch == 'd' && checkValid(width, height, landed, 'd')) {
+		blockX++;
+	    } else if (ch == 'w') {
+		try {
+		    boolean valid = true;
+		    int tempRotation = rotation+1; 
+		    tempRotation%= 4;
+		    int tempX = blockX; 
+		    int tempY = blockY; 
+		    int tempHeight = block[tempRotation].length; 
+		    int tempWidth = block[tempRotation][0].length;
+		    while(tempX + tempWidth > 10) {
+			tempX--;
+		    }
+		    
+		    if (tempY + height > 16) {
+			valid = false;
+		    } else {
+			for (int i = tempY; i < tempY + tempHeight; i++) {
+			    for (int j = tempX; j < tempX + tempWidth; j++) {
+				if (landed[i][j] != 0 && block[tempRotation][i-tempY][j-tempX] != 0) {
+				    valid = false;
+				}
+			    }
+			}
+		    }
+			
+		    if (valid) {
+			rotation++;
+			rotation%=4;        
+			height = block[rotation].length;
+			width = block[rotation][0].length;
+			while(blockX + width > 10) {
+			    blockX--;
+			} 
+		    }
+		} catch (Exception e) {
+		    Console con = new Console();
+		    con.println("there was an error in the program");
+		}
+		
+		
+		
+	    }
+	    drawLanded();
+	    drawCurrentTetromino();
+	    
 	}
     }
 } // KeyPress class

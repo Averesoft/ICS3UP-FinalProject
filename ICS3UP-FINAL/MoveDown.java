@@ -9,9 +9,11 @@ public class MoveDown extends Thread
 {
     Console c;
     static int blockX, blockY, rotation;
+    int dropRate = 500;
     int height, width;
     int landed[][], block[][][];
     int diff = 10;
+    int linesCleared;
     BufferedImage cyan = null;
     BufferedImage blue = null;
     BufferedImage green = null;
@@ -25,7 +27,7 @@ public class MoveDown extends Thread
     }
     public void drop() {
 	try {
-	    sleep(500);
+	    sleep(dropRate-linesCleared*10);
 	} catch (Exception e) {
 	}
 	blockY++;
