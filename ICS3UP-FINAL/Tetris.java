@@ -30,8 +30,11 @@ public class Tetris
     static BufferedImage red = null;
     BufferedImage yellow = null;
     BufferedImage grey = null;
+    BufferedImage splashScreenBackground = null;
     int landed[] [] = new int [16] [10];
     Tetromino tets[] = new Tetromino[7];
+    static boolean mainMenuExit = false;
+    
     public Tetris () {
 	c = new Console (25, 60);
     }
@@ -95,6 +98,7 @@ public class Tetris
 	    red = ImageIO.read (new File ("Red_Tile.png"));
 	    yellow = ImageIO.read (new File ("Yellow_Tile.png"));
 	    grey = ImageIO.read (new File ("Grey_Tile.png"));
+	    splashScreenBackground = ImageIO.read (new File ("splashScreenBackground.png"));
 	}
 	catch (Exception e)
 	{
@@ -251,18 +255,10 @@ public class Tetris
     {
 	boolean splashScreenDone = true;
 	for(int i=0; i<18; i++){
-	    c.clear();
-	    try{ 
-	    c.setColor(new Color(74, 74, 74));
-	    c.fillRoundRect(0, 0, 500, 500, 10, 10);
-	
-	 for (int h = 0 ; h < 16 ; h++)
-	 {
-	     for (int j = 0 ; j < 15 ; j++)
-		{
-		c.drawImage (grey, j * 30 + diff, h * 30 + diff, null);
-		}
-	  }
+	    
+	    try{
+	    
+	    c.drawImage(splashScreenBackground, 0, 0, null);
 
 	  if(i<=6){
 	  //Drawing the R
@@ -390,6 +386,7 @@ public class Tetris
 	  c.drawImage(red, (diff+300), (diff+(30*(2+3))),null);
 	  c.drawImage(red, (diff+300), (diff+(30*(2+4))),null);
 	  }
+	  
 	  c.setColor(new Color(255,255,255));
 	  c.drawString("Tetris, By: Jeremy Liang and Krish Patel, Date: November 16, 2020",70,390);
 	  
@@ -399,12 +396,89 @@ public class Tetris
 	}
     }
     
+    public void mainMenu()
+    {
+     c.drawImage(splashScreenBackground,0,0,null);
+     c.setColor(Color.white);
+     c.setFont(new Font("Verdana", 0, 50));
+     c.drawString("Tetris",162, diff+50);
+     c.setFont(new Font("Verdana", 0, 16));
+     c.drawString("By: Jeremy Liang and Krish", 122, diff+80);
+     
+     int select = 0; //Method of getting Main Menu Input was given by the wonderful Bernie Chen
+     char choice = 'x';
+     c.setFont(new Font("Verdana", 0, 24));
+     while (choice != ' ')
+       {
+	 c.setColor (Color.white);
+	 if (select == 0)
+	 c.setColor (Color.yellow);
+	 c.drawString("Enter Game", 165, diff+185);
+	 c.setColor (Color.white);
+	 if (select == 1)
+	 c.setColor (Color.yellow);
+	 c.drawString("Instructions",165,diff+275);
+	 c.setColor (Color.white);
+	 if (select == 2)
+	 c.setColor (Color.yellow);
+	 c.drawString("Exit",215 ,diff+365);
+	 choice = c.getChar ();
+	 if (choice == 's')
+	 ++select;
+	 else if (choice == 'w')
+	 --select;
+	 select = (select + 3) % 3;
+	}
+      if (select == 0)
+      {
+      mainMenuExit = true;
+      } 
+      else if (select == 1)
+      {
+      instructions();
+      } 
+      else if (select == 2)
+      {
+      goodbye();
+      }
+    }
+    
+    public void goodbye(){
+    c.drawImage(splashScreenBackground, 0 , 0, null);
+    
+    c.setColor(Color.white);
+    c.drawString("Thanks for playing our game!" ,diff+50 ,diff+205 );
+    c.drawString("Please press any key to exit." ,diff+50 ,diff+262 );
+    c.getChar();
+    System.exit(0);
+    }
+    
+    public void instructions()
+    {
+    c.drawImage(splashScreenBackground, 0 , 0, null);
+    c.setFont(new Font("Verdana", 1, 12));
+    c.drawString("The goal of Tetris is to stay alive as long as possible by getting as ", 20, 30);
+    c.drawString("many rows of blocks as possible. You can press A, and D to move" ,20 ,60 );
+    c.drawString("the piece left and right. You can press W to turn the block. " ,20 ,90 );
+    c.drawString("Pressing C means you can hold a block, this essentially stores", 20, 120);
+    c.drawString("a block to be used later. If there is a block in hold, they swap.", 20, 150);
+    c.drawString("If you are incapable of placing anymore blocks the game ends.", 20, 210);
+    c.drawString("Please press any key to continue back to main menu.", 20, 240);
+    c.getChar();
+    }
+    
+    
     public static void main (String[] args)
     {
 	
 	Tetris t = new Tetris ();
 	t.loadTiles ();        
-	//t.splashScreen();  
+	t.splashScreen();
+	while(!mainMenuExit)
+	{
+	t.mainMenu();
+	
+	}  
 	MoveDown md = new MoveDown(c);
 	KeyPress kp = new KeyPress(c);
 	t.loadTiles ();
