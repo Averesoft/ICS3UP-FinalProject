@@ -8,10 +8,7 @@ import java.applet.*;
 import javax.imageio.ImageIO;
 import java.io.*;
 import java.util.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import hsa.Console;
-import javax.sound.sampled.*;
 public class Tetris
 {
     Console c;
