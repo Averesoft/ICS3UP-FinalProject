@@ -14,7 +14,7 @@ import hsa.Console;
 import javax.sound.sampled.*;
 public class Tetris
 {
-    static Console c;
+    Console c;
     //The tiles
     int blockX = 4, blockY = 1;
     int random;
@@ -493,9 +493,9 @@ public class Tetris
 	    t.mainMenu();
 	}  
 	//thread to move piece down
-	MoveDown md = new MoveDown(c);
+	MoveDown md = new MoveDown(t.c);
 	//thread to move piece left and right and to rotate piece
-	KeyPress kp = new KeyPress(c);
+	KeyPress kp = new KeyPress(t.c);
 	//filling the landed array with 0s
 	t.fillLanded ();
 	//drawing the outline around the blocks

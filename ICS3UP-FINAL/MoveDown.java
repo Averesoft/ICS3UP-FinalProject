@@ -8,7 +8,7 @@ import hsa.Console;
 public class MoveDown extends Thread
 {
     Console c;
-    static int blockX, blockY, rotation;
+    int blockX, blockY, rotation;
     int dropRate = 500;
     int height, width;
     int landed[][], block[][][];

@@ -9,7 +9,7 @@ import hsa.Console;
 public class KeyPress extends Thread
 {
     Console c;           // The output console
-    static int blockX, blockY, rotation;
+    int blockX, blockY, rotation;
     boolean pressed = false;
     int height, width;
     int landed[][], block[][][];
@@ -93,7 +93,7 @@ public class KeyPress extends Thread
 	}
 	
     }
-    public static boolean checkValid(int w, int h, int landed[][], char direction) {
+    public boolean checkValid(int w, int h, int landed[][], char direction) {
 	boolean validity = true;
 	if (direction == 'a') {
 	    if (blockX <= 0) {
