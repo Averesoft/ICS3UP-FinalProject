@@ -9,10 +9,13 @@ import hsa.Console;
 public class KeyPress extends Thread
 {
     Console c;           // The output console
+    //x and y value of the block, rotation of the block
     int blockX, blockY, rotation;
-    boolean pressed = false;
+    //the height and width of the block
     int height, width;
+    //landed array and current tetromino
     int landed[][], block[][][];
+    //block shift
     int diff = 10;
     BufferedImage cyan = null;
     BufferedImage blue = null;
@@ -25,6 +28,7 @@ public class KeyPress extends Thread
     KeyPress(Console c) {
 	this.c = c;
     }
+    //drawing landed
     public void drawLanded () {
 	for (int i = 0 ; i < 16 ; i++) {
 	    for (int j = 0 ; j < 10 ; j++) {
@@ -56,44 +60,50 @@ public class KeyPress extends Thread
 	    }
 	}
     }
+    //drawing the current tetromino
     public void drawCurrentTetromino() {
-	
-	for (int i = 0; i < height; i++) {
-	    for (int j = 0; j < width; j++) {
-		int num = block[rotation][i][j];
-		if (num == 1)
-		{
-		    c.drawImage (blue, (j+blockX) * 30 + diff, (i+blockY) * 30 + diff, null);
-		}
-		else if (num == 2)
-		{
-		    c.drawImage (cyan, (j+blockX) * 30 + diff, (i+blockY) * 30 + diff, null);
-		}
-		else if (num == 3)
-		{
-		    c.drawImage (green, (j+blockX) * 30 + diff, (i+blockY) * 30 + diff, null);
-		}
-		else if (num == 4)
-		{
-		    c.drawImage (orange, (j+blockX) * 30 + diff, (i+blockY) * 30 + diff, null);
-		}
-		else if (num == 5)
-		{
-		    c.drawImage (purple, (j+blockX) * 30 + diff, (i+blockY) * 30 + diff, null);
-		}
-		else if (num == 6)
-		{
-		    c.drawImage (red, (j+blockX) * 30 + diff, (i+blockY) * 30 + diff, null);
-		}
-		else if (num == 7)
-		{
-		    c.drawImage (yellow, (j+blockX) * 30 + diff, (i+blockY) * 30 + diff, null);
+	try {
+	    for (int i = 0; i < height; i++) {
+		for (int j = 0; j < width; j++) {
+		    int num = block[rotation][i][j];
+		    if (num == 1)
+		    {
+			c.drawImage (blue, (j+blockX) * 30 + diff, (i+blockY) * 30 + diff, null);
+		    }
+		    else if (num == 2)
+		    {
+			c.drawImage (cyan, (j+blockX) * 30 + diff, (i+blockY) * 30 + diff, null);
+		    }
+		    else if (num == 3)
+		    {
+			c.drawImage (green, (j+blockX) * 30 + diff, (i+blockY) * 30 + diff, null);
+		    }
+		    else if (num == 4)
+		    {
+			c.drawImage (orange, (j+blockX) * 30 + diff, (i+blockY) * 30 + diff, null);
+		    }
+		    else if (num == 5)
+		    {
+			c.drawImage (purple, (j+blockX) * 30 + diff, (i+blockY) * 30 + diff, null);
+		    }
+		    else if (num == 6)
+		    {
+			c.drawImage (red, (j+blockX) * 30 + diff, (i+blockY) * 30 + diff, null);
+		    }
+		    else if (num == 7)
+		    {
+			c.drawImage (yellow, (j+blockX) * 30 + diff, (i+blockY) * 30 + diff, null);
+		    }
 		}
 	    }
+	} catch (Exception e) {
+	    Console con = new Console();
+	    con.println("An error occurred");
 	}
 	
     }
-    public boolean checkValid(int w, int h, int landed[][], char direction) {
+    //black box return method
+    private boolean checkValid(int w, int h, int landed[][], char direction) {
 	boolean validity = true;
 	if (direction == 'a') {
 	    if (blockX <= 0) {
@@ -122,57 +132,54 @@ public class KeyPress extends Thread
     }
     public void run() {
 	while(true) {
+	    //getting keypress
 	    char ch = c.getChar();
-	    pressed = true;
 	    try{
-	    sleep(10);
+		sleep(10);
 	    } catch (Exception e) {
 	    }
 	    if (ch == 'a' && checkValid(width, height, landed, 'a')) {
+		//if moving left is valid, then move
 		blockX--;
 		drawLanded();
 		drawCurrentTetromino();
 	    } else if (ch == 'd' && checkValid(width, height, landed, 'd')) {
+		//if moving right is valid, then move
 		blockX++;
 		drawLanded();
 		drawCurrentTetromino();
 	    } else if (ch == 'w') {
-		try {
-		    boolean valid = true;
-		    int tempRotation = rotation+1; 
-		    tempRotation%= 4;
-		    int tempX = blockX; 
-		    int tempY = blockY; 
-		    int tempHeight = block[tempRotation].length; 
-		    int tempWidth = block[tempRotation][0].length;
-		    while(tempX + tempWidth > 10) {
-			tempX--;
-		    }
-		    
-		    if (tempY + height > 16) {
-			valid = false;
-		    } else {
-			for (int i = tempY; i < tempY + tempHeight; i++) {
-			    for (int j = tempX; j < tempX + tempWidth; j++) {
-				if (landed[i][j] != 0 && block[tempRotation][i-tempY][j-tempX] != 0) {
-				    valid = false;
-				}
+		//check if the block is able to rotate by using temporary variables, if not then the blcok will not rotate
+		boolean valid = true;
+		int tempRotation = rotation+1; 
+		tempRotation%= 4;
+		int tempX = blockX; 
+		int tempY = blockY; 
+		int tempHeight = block[tempRotation].length; 
+		int tempWidth = block[tempRotation][0].length;
+		while(tempX + tempWidth > 10) {
+		    tempX--;
+		}
+		if (tempY + tempHeight > 16) {
+		    valid = false;
+		} else {
+		    for (int i = tempY; i < tempY + tempHeight; i++) {
+			for (int j = tempX; j < tempX + tempWidth; j++) {
+			    if (landed[i][j] != 0 && block[tempRotation][i-tempY][j-tempX] != 0) {
+				valid = false;
 			    }
 			}
 		    }
-			
-		    if (valid) {
-			rotation++;
-			rotation%=4;        
-			height = block[rotation].length;
-			width = block[rotation][0].length;
-			while(blockX + width > 10) {
-			    blockX--;
-			} 
-		    }
-		} catch (Exception e) {
-		    Console con = new Console();
-		    con.println("there was an error in the program");
+		}
+		//if it is valid, rotate the block and redraw landed        
+		if (valid) {
+		    rotation++;
+		    rotation%=4;        
+		    height = block[rotation].length;
+		    width = block[rotation][0].length;
+		    while(blockX + width > 10) {
+			blockX--;
+		    } 
 		}
 		drawLanded();
 		drawCurrentTetromino();

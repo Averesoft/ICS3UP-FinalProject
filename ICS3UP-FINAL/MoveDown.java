@@ -8,12 +8,19 @@ import hsa.Console;
 public class MoveDown extends Thread
 {
     Console c;
+    //x and y value of the block, rotation of the block
     int blockX, blockY, rotation;
+    //the initial droprate
     int dropRate = 500;
+    //height and width of block
     int height, width;
+    //landed array and current tetromino
     int landed[][], block[][][];
+    //block shift
     int diff = 10;
+    //the lines cleared
     int linesCleared;
+    //images
     BufferedImage cyan = null;
     BufferedImage blue = null;
     BufferedImage green = null;
@@ -25,8 +32,10 @@ public class MoveDown extends Thread
     MoveDown(Console c) {
 	this.c = c;
     }
+    //block is constantly dropping until thread stops
     public void drop() {
 	try {
+	    //making it go faster with more lines you clear
 	    sleep(dropRate-linesCleared*20);
 	} catch (Exception e) {
 	}
@@ -36,6 +45,7 @@ public class MoveDown extends Thread
 	drawLanded();
 	drawCurrentTetromino();
     }
+    //drawing landed
     public void drawLanded () {
 	for (int i = 0 ; i < 16 ; i++) {
 	    for (int j = 0 ; j < 10 ; j++) {
@@ -67,6 +77,7 @@ public class MoveDown extends Thread
 	    }
 	}
     }
+    //drawing the current tetromino
     public void drawCurrentTetromino() {
 	
 	for (int i = 0; i < height; i++) {
@@ -103,9 +114,8 @@ public class MoveDown extends Thread
 	    }
 	}
     }
+    //running the thread
     public void run() {
-	blockY = 2;
-	height = height;
 	while(true) {
 	    drop();
 	}
