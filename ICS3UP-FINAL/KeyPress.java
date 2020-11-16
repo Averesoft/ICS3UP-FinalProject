@@ -111,7 +111,7 @@ public class KeyPress extends Thread
 		validity = false;
 	    } else {
 		for (int i = blockY; i < blockY + h; i++) {
-		    if (landed[blockY][blockX+1] != 0) {
+		    if (landed[i][blockX+1] != 0) {
 			validity = false;
 		    }
 		}
@@ -130,8 +130,12 @@ public class KeyPress extends Thread
 	    }
 	    if (ch == 'a' && checkValid(width, height, landed, 'a')) {
 		blockX--;
+		drawLanded();
+		drawCurrentTetromino();
 	    } else if (ch == 'd' && checkValid(width, height, landed, 'd')) {
 		blockX++;
+		drawLanded();
+		drawCurrentTetromino();
 	    } else if (ch == 'w') {
 		try {
 		    boolean valid = true;
@@ -170,13 +174,9 @@ public class KeyPress extends Thread
 		    Console con = new Console();
 		    con.println("there was an error in the program");
 		}
-		
-		
-		
+		drawLanded();
+		drawCurrentTetromino();
 	    }
-	    drawLanded();
-	    drawCurrentTetromino();
-	    
 	}
     }
 } // KeyPress class
