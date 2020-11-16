@@ -479,8 +479,11 @@ public class Tetris
 	c.setColor(Color.white);
 	c.setFont (new Font ("Verdana", 0, 16));
 	c.drawString("You lost! You cleared " + linesCleared + " lines!",diff+125 ,diff+205 );
-	c.drawString("Please press any key to proceed recent score screen." ,diff+10,diff+262 );
-	c.getChar();
+	c.drawString("Please press space to proceed recent score screen." ,diff+10,diff+262 );
+	char ch = '_';
+	while(ch != ' ') {
+	    ch = c.getChar();
+	}
 	c.setFont (new Font ("Verdana", 0, 24));
     }
     //the instructions of the program
