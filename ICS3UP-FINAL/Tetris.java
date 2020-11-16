@@ -237,7 +237,7 @@ public class Tetris
     
     public static boolean hasLanded(int blockX, int blockY, int height, int width, int landed[][], int block[][][], int rotation) {
 	boolean validity = false;
-	if (blockY + height > 15) {
+	if (blockY + height > 15 ) {
 	    validity = true;    
 	} else {
 	    try {
@@ -250,7 +250,7 @@ public class Tetris
 		}
 	    } catch (Exception e) {
 		Console con = new Console();
-		con.println("Please do not spam buttons, as it may cause problems.");
+		con.println("There was an error in the program.");
 	    }
 	     
 	}
@@ -478,7 +478,15 @@ public class Tetris
 	c.drawString("Please press any key to continue back to main menu.", 20, 240);
 	c.getChar();
     }
-    
+    public void drawScore() {
+	c.setFont (new Font ("Verdana", 0, 16));
+	c.setColor(new Color(74, 74, 74));
+	c.fillRect(320, 0, 500, 500);
+	c.setColor(Color.white);
+	c.drawString("Lines Cleared: ",320,30);
+	c.drawString(String.valueOf(linesCleared), 320, 50);
+	c.setFont (new Font ("Verdana", 0, 24));
+    }
     
     public static void main (String[] args)
     {
@@ -487,7 +495,7 @@ public class Tetris
 	//loading in the images
 	t.loadTiles ();        
 	//splash screen
-	t.splashScreen();
+	//t.splashScreen();
 	//main menu, will keep looping until it is asked to exit
 	while(!t.mainMenuExit) {
 	    t.mainMenu();
@@ -549,6 +557,7 @@ public class Tetris
 	//drawing the landed array and tetromino at the beginning
 	t.drawLanded ();
 	t.drawCurrentTetromino();
+	t.drawScore();
 	//Tetris Running
 	while(true) {
 	    //Constantly making sure that the blockY variables will be the same, because moveDown will be moving down every 500-20*linesCleared seconds
@@ -634,7 +643,7 @@ public class Tetris
 			}
 		    }
 		    t.linesCleared++; 
-		   
+		    t.drawScore();
 		}
 	    }
 	    md.linesCleared = t.linesCleared;

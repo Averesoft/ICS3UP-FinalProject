@@ -111,7 +111,7 @@ public class KeyPress extends Thread
 		validity = false;
 	    } else {
 		for (int i = blockY; i < blockY + h; i++) {
-		    if (landed[i][blockX+1] != 0) {
+		    if (landed[i][blockX+w] != 0) {
 			validity = false;
 		    }
 		}
