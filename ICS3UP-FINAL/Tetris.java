@@ -493,10 +493,8 @@ public class Tetris
 	c.drawString("The goal of Tetris is to stay alive as long as possible by getting as ", 20, 30);
 	c.drawString("many rows of blocks as possible. You can press A, and D to move" ,20 ,60 );
 	c.drawString("the piece left and right. You can press W to turn the block. " ,20 ,90 );
-	c.drawString("Pressing C means you can hold a block, this essentially stores", 20, 120);
-	c.drawString("a block to be used later. If there is a block in hold, they swap.", 20, 150);
-	c.drawString("If you are incapable of placing anymore blocks the game ends.", 20, 210);
-	c.drawString("Please press any key to continue back to main menu.", 20, 240);
+	c.drawString("If you are incapable of placing anymore blocks the game ends.", 20, 120);
+	c.drawString("Please press any key to continue back to main menu.", 20, 150);
 	c.getChar();
     }
     //drawing the score
