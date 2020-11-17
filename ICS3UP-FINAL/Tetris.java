@@ -44,6 +44,7 @@ public class Tetris
     boolean mainMenuExit = false;
     //boolean checking if the block has landed yet
     boolean land = false;
+    int scores[] = new int [10];
     //constructor
     public Tetris () {
 	c = new Console (25, 60);
@@ -497,6 +498,39 @@ public class Tetris
 	c.drawString("Please press any key to continue back to main menu.", 20, 150);
 	c.getChar();
     }
+    //showing the score
+    public void showScores() {
+	//reading in previous scores
+	//try catching so that it will 
+	try {
+	    c.setFont (new Font ("Verdana", 0, 16));
+	    BufferedReader br = new BufferedReader(new FileReader("score.txt"));
+	    //reading in the values
+	    for (int i = 0; i < 10; i++) {
+		scores[i] = Integer.parseInt(br.readLine());
+	    }
+	    //temporary array to store the new values
+	    int temp[] = new int[10];
+	    temp[0] = linesCleared;
+	    for (int i = 1; i < 10; i++) {
+		temp[i] = scores[i-1];
+	    }
+	    //writing to a file
+	    PrintWriter pw = new PrintWriter(new FileWriter("score.txt"));
+	    c.drawImage(splashScreenBackground, 0 , 0, null);
+	    for (int i = 0; i < 10; i++) {
+		scores[i] = temp[i];
+		c.drawString(String.valueOf(scores[i]), 50, 50+i*20);
+		pw.println(scores[i]);
+	    }
+	    pw.close();
+	} catch (Exception e) {
+	}
+	//going to next screen
+	c.drawString("Press any key to go to the exit screen", 50, 300);
+	c.getChar();
+	c.setFont (new Font ("Verdana", 0, 24));
+    }
     //drawing the score
     public void drawScore() {
 	//this will show the score every time it updates
@@ -608,6 +642,7 @@ public class Tetris
 		    kp.stop();
 		    //shows you how many lines cleared, the recent scores and the goodbye method
 		    t.lost();
+		    t.showScores();
 		    t.goodbye();
 		}
 		//if the game hasn't ended yet, we will update the blockX and blockY, then land the block

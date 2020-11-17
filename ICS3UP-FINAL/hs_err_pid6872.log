@@ -1,0 +1,105 @@
+
+An unexpected exception has been detected in native code outside the VM.
+Unexpected Signal : EXCEPTION_ACCESS_VIOLATION (0xc0000005) occurred at PC=0x5327BB9
+Function=Java_sun_awt_windows_WToolkit_printWindowsVersion+0x1CB9
+Library=C:\Program Files (x86)\Ready to Program\Support\jre142_01\bin\awt.dll
+
+Current Java thread:
+	at sun.awt.windows.WComponentPeer.nativeHandleEvent(Native Method)
+	at sun.awt.windows.WComponentPeer.handleEvent(Unknown Source)
+	at java.awt.Component.dispatchEventImpl(Unknown Source)
+	at java.awt.Component.dispatchEvent(Unknown Source)
+	at java.awt.EventQueue.dispatchEvent(Unknown Source)
+	at java.awt.EventDispatchThread.pumpOneEventForHierarchy(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.run(Unknown Source)
+
+Dynamic libraries:
+0x00400000 - 0x00437000 	C:\Program Files (x86)\Ready to Program\Support\Bin\javasup.exe
+0x77330000 - 0x774D3000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x76F20000 - 0x77010000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x76570000 - 0x76784000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x761D0000 - 0x76366000 	C:\WINDOWS\System32\USER32.dll
+0x77110000 - 0x77128000 	C:\WINDOWS\System32\win32u.dll
+0x76370000 - 0x76393000 	C:\WINDOWS\System32\GDI32.dll
+0x10000000 - 0x10029000 	C:\Program Files (x86)\Ready to Program\Support\Bin\jsdll.dll
+0x76990000 - 0x76A6A000 	C:\WINDOWS\System32\gdi32full.dll
+0x772A0000 - 0x7731B000 	C:\WINDOWS\System32\msvcp_win.dll
+0x76870000 - 0x76990000 	C:\WINDOWS\System32\ucrtbase.dll
+0x758D0000 - 0x7597F000 	C:\WINDOWS\System32\comdlg32.dll
+0x75810000 - 0x758CF000 	C:\WINDOWS\System32\msvcrt.dll
+0x76B00000 - 0x76D81000 	C:\WINDOWS\System32\combase.dll
+0x76E60000 - 0x76F1A000 	C:\WINDOWS\System32\RPCRT4.dll
+0x76A70000 - 0x76AF7000 	C:\WINDOWS\System32\shcore.dll
+0x763A0000 - 0x763E5000 	C:\WINDOWS\System32\SHLWAPI.dll
+0x751F0000 - 0x757A3000 	C:\WINDOWS\System32\SHELL32.dll
+0x71530000 - 0x715BD000 	C:\WINDOWS\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_5.82.19041.488_none_89e6152f0b32762e\COMCTL32.dll
+0x77070000 - 0x770EA000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x767F0000 - 0x76865000 	C:\WINDOWS\System32\sechost.dll
+0x75FF0000 - 0x76015000 	C:\WINDOWS\System32\IMM32.DLL
+0x08000000 - 0x08136000 	C:\Program Files (x86)\Ready to Program\Support\jre142_01\bin\client\jvm.dll
+0x6F0E0000 - 0x6F108000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x02240000 - 0x02247000 	C:\Program Files (x86)\Ready to Program\Support\jre142_01\bin\hpi.dll
+0x02270000 - 0x0227E000 	C:\Program Files (x86)\Ready to Program\Support\jre142_01\bin\verify.dll
+0x02290000 - 0x022A8000 	C:\Program Files (x86)\Ready to Program\Support\jre142_01\bin\java.dll
+0x022C0000 - 0x022CD000 	C:\Program Files (x86)\Ready to Program\Support\jre142_01\bin\zip.dll
+0x02500000 - 0x0251C000 	C:\Program Files (x86)\Ready to Program\Support\jre142_01\bin\jdwp.dll
+0x02520000 - 0x02526000 	C:\Program Files (x86)\Ready to Program\Support\jre142_01\bin\dt_shmem.dll
+0x05290000 - 0x0539F000 	C:\Program Files (x86)\Ready to Program\Support\jre142_01\bin\awt.dll
+0x760C0000 - 0x761A3000 	C:\WINDOWS\System32\ole32.dll
+0x6F1F0000 - 0x6F25D000 	C:\WINDOWS\SYSTEM32\WINSPOOL.DRV
+0x70770000 - 0x7080F000 	C:\WINDOWS\SYSTEM32\apphelp.dll
+0x78BD0000 - 0x78E21000 	C:\WINDOWS\SYSTEM32\AcGenral.DLL
+0x76020000 - 0x760B6000 	C:\WINDOWS\System32\OLEAUT32.dll
+0x6A850000 - 0x6A865000 	C:\WINDOWS\SYSTEM32\samcli.dll
+0x6F170000 - 0x6F1E4000 	C:\WINDOWS\SYSTEM32\UxTheme.dll
+0x750E0000 - 0x750E8000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x70150000 - 0x70175000 	C:\WINDOWS\SYSTEM32\USERENV.dll
+0x70410000 - 0x705B9000 	C:\WINDOWS\SYSTEM32\urlmon.dll
+0x6B790000 - 0x6B7A9000 	C:\WINDOWS\SYSTEM32\MPR.dll
+0x6CEF0000 - 0x6CF16000 	C:\WINDOWS\SYSTEM32\dwmapi.dll
+0x701B0000 - 0x701D8000 	C:\WINDOWS\SYSTEM32\SspiCli.dll
+0x701E0000 - 0x7040B000 	C:\WINDOWS\SYSTEM32\iertutil.dll
+0x550F0000 - 0x55109000 	C:\WINDOWS\SYSTEM32\MSACM32.dll
+0x550D0000 - 0x550ED000 	C:\WINDOWS\SYSTEM32\winmmbase.dll
+0x053B0000 - 0x05400000 	C:\Program Files (x86)\Ready to Program\Support\jre142_01\bin\fontmanager.dll
+0x551F0000 - 0x552D9000 	C:\WINDOWS\SYSTEM32\ddraw.dll
+0x750F0000 - 0x750FF000 	C:\WINDOWS\SYSTEM32\kernel.appcore.dll
+0x6B4E0000 - 0x6B5A2000 	C:\WINDOWS\SYSTEM32\dxgi.dll
+0x59450000 - 0x59457000 	C:\WINDOWS\SYSTEM32\DCIMAN32.dll
+0x595B0000 - 0x5A04D000 	C:\WINDOWS\SYSTEM32\igdumd32.dll
+0x54650000 - 0x546B3000 	C:\WINDOWS\SYSTEM32\D3DIM700.DLL
+0x75F10000 - 0x75FE3000 	C:\WINDOWS\System32\MSCTF.dll
+0x77010000 - 0x7706C000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x5B3B0000 - 0x5B46A000 	C:\WINDOWS\SYSTEM32\textinputframework.dll
+0x5B130000 - 0x5B3AE000 	C:\WINDOWS\System32\CoreUIComponents.dll
+0x5B090000 - 0x5B12B000 	C:\WINDOWS\System32\CoreMessaging.dll
+0x75E10000 - 0x75E73000 	C:\WINDOWS\System32\WS2_32.dll
+0x709E0000 - 0x70A09000 	C:\WINDOWS\SYSTEM32\ntmarta.dll
+0x6F910000 - 0x6F9EE000 	C:\WINDOWS\SYSTEM32\wintypes.dll
+0x07E40000 - 0x07E5E000 	C:\Program Files (x86)\Ready to Program\Support\jre142_01\bin\jpeg.dll
+0x07E60000 - 0x07E83000 	C:\Program Files (x86)\Ready to Program\Support\jre142_01\bin\cmm.dll
+0x770F0000 - 0x77109000 	C:\WINDOWS\System32\imagehlp.dll
+0x70840000 - 0x709C8000 	C:\WINDOWS\System32\dbghelp.dll
+0x76DB0000 - 0x76DB6000 	C:\WINDOWS\System32\PSAPI.DLL
+
+Heap at VM Abort:
+Heap
+ def new generation   total 576K, used 5K [0x10030000, 0x100d0000, 0x10510000)
+  eden space 512K,   1% used [0x10030000, 0x10031570, 0x100b0000)
+  from space 64K,   0% used [0x100c0000, 0x100c0000, 0x100d0000)
+  to   space 64K,   0% used [0x100b0000, 0x100b0000, 0x100c0000)
+ tenured generation   total 3868K, used 3239K [0x10510000, 0x108d7000, 0x14030000)
+   the space 3868K,  83% used [0x10510000, 0x10839cb0, 0x10839e00, 0x108d7000)
+ compacting perm gen  total 4096K, used 3384K [0x14030000, 0x14430000, 0x18030000)
+   the space 4096K,  82% used [0x14030000, 0x1437e2a8, 0x1437e400, 0x14430000)
+
+Local Time = Mon Nov 16 22:17:37 2020
+Elapsed Time = 1
+#
+# The exception above was detected in native code outside the VM
+#
+# Java VM: Java HotSpot(TM) Client VM (1.4.2_01-b06 mixed mode)
+#
